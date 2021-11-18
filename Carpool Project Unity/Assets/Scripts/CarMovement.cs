@@ -25,23 +25,44 @@ public class CarMovement : MonoBehaviour
     {
         source = transform.position;
         mf = car.GetComponent<MeshFilter>();
+        Debug.LogError(source.magnitude);
+        Debug.LogError(goal.magnitude);
         mesh = mf.mesh;
         geometry = mesh.vertices;
         dt = 0f;
         currAngleRot = 0f;
-        if ((Mathf.Acos(Vector2.Dot(source, goal - source)) * Mathf.Rad2Deg) >= 90f && (Mathf.Acos(Vector2.Dot(source, goal - source)) * Mathf.Rad2Deg) < 90.00001f)
+        if (goal.magnitude < source.magnitude)
         {
-            direction = DIRECTION.FORWARD;
+            if ((Mathf.Acos(Vector3.Dot(source.normalized, goal.normalized - source.normalized)) * Mathf.Rad2Deg) >= 90f && (Mathf.Acos(Vector2.Dot(source, goal - source)) * Mathf.Rad2Deg) < 90.00001f)
+            {
+                direction = DIRECTION.FORWARD;
+            }
+            else if ((Mathf.Acos(Vector3.Dot(source.normalized, goal.normalized - source.normalized)) * Mathf.Rad2Deg) > 90f)
+            {
+                direction = DIRECTION.LEFT;
+            }
+            else if ((Mathf.Acos(Vector3.Dot(source.normalized, goal.normalized - source.normalized)) * Mathf.Rad2Deg) < 90f)
+            {
+                direction = DIRECTION.RIGHT;
+            }
         }
-        else if ((Mathf.Acos(Vector2.Dot(source, goal - source)) * Mathf.Rad2Deg) > 90f)
+        else
         {
-            direction = DIRECTION.LEFT;
+            if ((Mathf.Acos(Vector3.Dot(source.normalized, source.normalized - goal.normalized)) * Mathf.Rad2Deg) >= 90f && (Mathf.Acos(Vector2.Dot(source, goal - source)) * Mathf.Rad2Deg) < 90.00001f)
+            {
+                direction = DIRECTION.FORWARD;
+            }
+            else if ((Mathf.Acos(Vector3.Dot(source.normalized, source.normalized - goal.normalized)) * Mathf.Rad2Deg) > 90f)
+            {
+                direction = DIRECTION.LEFT;
+            }
+            else if ((Mathf.Acos(Vector3.Dot(source.normalized, source.normalized - goal.normalized)) * Mathf.Rad2Deg) < 90f)
+            {
+                direction = DIRECTION.RIGHT;
+            }
         }
-        else if ((Mathf.Acos(Vector2.Dot(source, goal - source)) * Mathf.Rad2Deg) < 90f)
-        {
-            direction = DIRECTION.RIGHT;
-        }
-        Debug.LogError(Mathf.Acos(Vector2.Dot(source, goal-source)) * Mathf.Rad2Deg);
+        Debug.LogError(direction);
+        Debug.LogError(Mathf.Acos(Vector3.Dot(source.normalized, goal.normalized - source.normalized)) * Mathf.Rad2Deg);
     }
 
     void Update()

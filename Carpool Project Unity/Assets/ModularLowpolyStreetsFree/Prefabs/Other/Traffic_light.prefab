@@ -40,6 +40,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5880005924203062904}
     m_Modifications:
+    - target: {fileID: 90380254652179261, guid: 1090f9c6b3e14ab4981676a3bb078f44, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 404777810479666867, guid: 1090f9c6b3e14ab4981676a3bb078f44, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 687253036384896240, guid: 1090f9c6b3e14ab4981676a3bb078f44, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 829717397850881618, guid: 1090f9c6b3e14ab4981676a3bb078f44, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371253328796176118, guid: 1090f9c6b3e14ab4981676a3bb078f44, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3373308323472075992, guid: 1090f9c6b3e14ab4981676a3bb078f44, type: 3}
       propertyPath: m_Name
       value: Traffic_light_EU
@@ -87,6 +107,10 @@ PrefabInstance:
     - target: {fileID: 4352963695282621472, guid: 1090f9c6b3e14ab4981676a3bb078f44, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199023441931214187, guid: 1090f9c6b3e14ab4981676a3bb078f44, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1090f9c6b3e14ab4981676a3bb078f44, type: 3}
