@@ -39,27 +39,30 @@ public class TrafficLight : MonoBehaviour
 
     IEnumerator changeLighting()
     {
-        switch (state)
+        while (true)
         {
-            case STATE.RED:
-                redLight.material = red_lighting;
-                greenLight.material = green;
-                yellowLight.material = yellow;
-                state = STATE.YELLOW;
-                break;
-            case STATE.YELLOW:
-                redLight.material = red;
-                greenLight.material = green;
-                yellowLight.material = yellow_lighting;
-                state = STATE.GREEN;
-                break;
-            case STATE.GREEN:
-                redLight.material = red;
-                greenLight.material = green_lighting;
-                yellowLight.material = yellow;
-                state = STATE.RED;
-                break;
+            switch (state)
+            {
+                case STATE.RED:
+                    redLight.material = red_lighting;
+                    greenLight.material = green;
+                    yellowLight.material = yellow;
+                    state = STATE.YELLOW;
+                    break;
+                case STATE.YELLOW:
+                    redLight.material = red;
+                    greenLight.material = green;
+                    yellowLight.material = yellow_lighting;
+                    state = STATE.GREEN;
+                    break;
+                case STATE.GREEN:
+                    redLight.material = red;
+                    greenLight.material = green_lighting;
+                    yellowLight.material = yellow;
+                    state = STATE.RED;
+                    break;
+            }
+            yield return new WaitForSeconds(2.0f);
         }
-        yield return new WaitForSeconds(5.0f);
     }
 }
