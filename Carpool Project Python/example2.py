@@ -1,5 +1,5 @@
 from example import *
-import matplotlib.pyplot as plt
+
 
 #inicializa 5 pasajeros
 passenger_model = PassengerModel(5)

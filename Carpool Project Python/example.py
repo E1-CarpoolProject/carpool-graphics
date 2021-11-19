@@ -108,6 +108,7 @@ class CarAgent(Agent):
         else:
             print("El coche está lleno :(")
             return False
+
 class CarModel(Model):
     """A model with some number of agents."""
     def __init__(self, N):
@@ -198,7 +199,7 @@ class IntersectionAgent(Agent):
 """
      z
      |
--x ---- x
+-x -- -- x
      |
      -z
 
@@ -210,6 +211,7 @@ class IntersectionAgent(Agent):
     def step(self):
         # The agent's step will go here.
         print ("TrafficLightAgent " + str(self.unique_id) +".")
+
 class MoneyModel(Model):
     """A model with some number of agents."""
     def __init__(self, N):
