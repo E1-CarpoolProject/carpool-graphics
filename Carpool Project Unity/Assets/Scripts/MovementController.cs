@@ -37,10 +37,6 @@ public class MovementController : MonoBehaviour
                     car.goal = pointsToVisit[iteration];
                     car.resetMovement();
                 }
-                if (iteration == pointsToVisit.Length)
-                {
-
-                }
             }
         }
     }
