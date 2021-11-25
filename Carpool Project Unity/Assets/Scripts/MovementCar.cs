@@ -36,6 +36,7 @@ public class MovementCar : MonoBehaviour
             else if (dt < 1.0f) segment = 3;
 
             angleAuB = Mathf.Atan2(pointsToVisit[segment + 1].z, pointsToVisit[segment].x);
+            Debug.Log(angleAuB * Mathf.Rad2Deg);
             Vector3 pos = Lerp(pointsToVisit[segment], pointsToVisit[segment + 1], dt, segment);
             mf = car.GetComponent<MeshFilter>();
             mesh = mf.mesh;
@@ -51,7 +52,6 @@ public class MovementCar : MonoBehaviour
 
     public Vector3[] ApplyTransformation(Vector3 pos)
     {
-        //Matrix4x4 origin = Transformations.TranslateM(pointsToVisit[segment].x, pointsToVisit[segment].y, pointsToVisit[segment].z);
         Matrix4x4 translation = Transformations.TranslateM(pos.x, pos.y, pos.z);
         Matrix4x4 rotation = Transformations.RotateM(angleAuB, Transformations.AXIS.AX_Y);
         Vector3[] transform = new Vector3[geometry.Length];
