@@ -14,6 +14,8 @@ public class MovementCar : MonoBehaviour
     private MeshFilter mf;
     private Mesh mesh;
     private float angleAuB;
+    private Vector3 currPos;
+    private Vector3 prevPos;
     void Start()
     {
         mf = car.GetComponent<MeshFilter>();
@@ -21,6 +23,7 @@ public class MovementCar : MonoBehaviour
         geometry = mesh.vertices;
         timer = totalTime;
         segment = 0;
+        prevPos = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -35,12 +38,16 @@ public class MovementCar : MonoBehaviour
             else if (dt < 0.75f) segment = 2;
             else if (dt < 1.0f) segment = 3;
 
-            angleAuB = Mathf.Atan2(pointsToVisit[segment + 1].z, pointsToVisit[segment].x);
-            Debug.Log(angleAuB * Mathf.Rad2Deg);
-            Vector3 pos = Lerp(pointsToVisit[segment], pointsToVisit[segment + 1], dt, segment);
+            currPos = Lerp(pointsToVisit[segment], pointsToVisit[segment + 1], dt, segment);
+            //A donde voy y cual es la posicion actual
+            Vector3 targetDir = pointsToVisit[segment + 1] - currPos;
+            angleAuB = Mathf.Atan2(targetDir.z, targetDir.x) * Mathf.Rad2Deg;
+            Debug.Log("Dir: " + targetDir.ToString("F5"));
+            Debug.Log(angleAuB);
+            prevPos = currPos;
             mf = car.GetComponent<MeshFilter>();
             mesh = mf.mesh;
-            mesh.vertices = ApplyTransformation(pos);
+            mesh.vertices = ApplyTransformation(currPos);
         }
     }
 
