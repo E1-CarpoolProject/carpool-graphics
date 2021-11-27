@@ -15,54 +15,35 @@ public class TrafficLight : MonoBehaviour
     private MeshRenderer yellowLight;
     private MeshRenderer greenLight;
 
-    private STATE state;
+    public int state;
 
-    public enum STATE
-    {
-        RED,
-        YELLOW,
-        GREEN
-    }
     void Start()
     {
         redLight = transform.GetChild(1).gameObject.GetComponent<MeshRenderer>();
         yellowLight = transform.GetChild(2).gameObject.GetComponent<MeshRenderer>();
         greenLight = transform.GetChild(0).gameObject.GetComponent<MeshRenderer>();
-        state = STATE.RED;
-        StartCoroutine(changeLighting());
+        state = 2;
     }
 
     void Update()
     {
-
-    }
-
-    IEnumerator changeLighting()
-    {
-        while (true)
+        switch (state)
         {
-            switch (state)
-            {
-                case STATE.RED:
-                    redLight.material = red_lighting;
-                    greenLight.material = green;
-                    yellowLight.material = yellow;
-                    state = STATE.YELLOW;
-                    break;
-                case STATE.YELLOW:
-                    redLight.material = red;
-                    greenLight.material = green;
-                    yellowLight.material = yellow_lighting;
-                    state = STATE.GREEN;
-                    break;
-                case STATE.GREEN:
-                    redLight.material = red;
-                    greenLight.material = green_lighting;
-                    yellowLight.material = yellow;
-                    state = STATE.RED;
-                    break;
-            }
-            yield return new WaitForSeconds(2.0f);
+            case 0:
+                redLight.material = red_lighting;
+                greenLight.material = green;
+                yellowLight.material = yellow;
+                break;
+            case 1:
+                redLight.material = red;
+                greenLight.material = green;
+                yellowLight.material = yellow_lighting;
+                break;
+            case 2:
+                redLight.material = red;
+                greenLight.material = green_lighting;
+                yellowLight.material = yellow;
+                break;
         }
     }
 }
