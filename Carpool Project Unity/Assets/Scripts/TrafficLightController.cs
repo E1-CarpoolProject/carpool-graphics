@@ -18,14 +18,15 @@ public class TrafficLightController : MonoBehaviour
     public float timer;
 
     IEnumerator ReceiveNextStep(){
-WWWForm form = new WWWForm();
+        //[{"state": 1}, {"state": 2}, {"state": 1}, {"state": 2}]
+        WWWForm form = new WWWForm();
         form.AddField("bundle", "the data");
         string url = "http://localhost:8585/traffic_lights";
-        UnityWebRequest www = UnityWebRequest.Post(url, form);
+        UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();          // Talk to Python
         if (www.error != null)
         {
-            Debug.Log(www.error);
+            Debug.LogError(www.error);
         }
         else
         {

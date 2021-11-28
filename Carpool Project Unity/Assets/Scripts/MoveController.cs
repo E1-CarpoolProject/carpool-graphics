@@ -19,6 +19,7 @@ public class MoveController : MonoBehaviour
     
     IEnumerator ReceiveNextStep()
     {
+        //[{"new_direction": 1}, {"new_direction": 2}, {"new_direction": 1}, {"new_direction": 2}]
         WWWForm form = new WWWForm();
         form.AddField("bundle", "the data");
         string url = "http://localhost:8585/multiagentes";
@@ -26,7 +27,7 @@ public class MoveController : MonoBehaviour
         yield return www.SendWebRequest();          // Talk to Python
         if (www.error != null)
         {
-            Debug.Log(www.error);
+            Debug.LogError(www.error);
         }
         else
         {
