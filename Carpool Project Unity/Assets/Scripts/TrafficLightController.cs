@@ -15,7 +15,7 @@ public class TrafficLightController : MonoBehaviour
     List<StopLight> stop_lights;
     public TrafficLight[] traffic_lights;
     public float timeToUpdate;
-    public float timer;
+    private float timer;
 
     IEnumerator ReceiveNextStep(){
         //[{"state": 1}, {"state": 2}, {"state": 1}, {"state": 2}]
@@ -57,7 +57,7 @@ public class TrafficLightController : MonoBehaviour
     {
         stop_lights = new List<StopLight>();
         timer = timeToUpdate;
-        StartCoroutine(ReceiveNextStep());
+        //StartCoroutine(ReceiveNextStep());
     }
 
     // Update is called once per frame

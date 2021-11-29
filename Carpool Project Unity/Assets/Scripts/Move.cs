@@ -15,7 +15,7 @@ public class Move : MonoBehaviour
     private MeshFilter mf;
     private Mesh mesh;
 
-    void Start()
+    void Awake()
     {
         mf = car.GetComponent<MeshFilter>();
         mesh = mf.mesh;
