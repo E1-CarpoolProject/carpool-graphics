@@ -14,7 +14,7 @@ public class MoveController : MonoBehaviour
 {
     List<Vector3> next_Target;
     public List<Move> cars;
-    public GameObject prefab;
+    public GameObject[] prefabs;
     public float timeToUpdate;
     private float timer;
     
@@ -47,7 +47,9 @@ public class MoveController : MonoBehaviour
                 else strs[i] = '{' + strs[i] + '}';
                 //Debug.Log(strs[i]);
                 Vector3 a = JsonUtility.FromJson<Vector3>(strs[i]);
-                GameObject new_car = Instantiate(prefab, new Vector3(5 * a.x, 5 * a.y, 5 * a.z), Quaternion.identity);
+                System.Random rd = new System.Random();
+                int random_car = rd.Next(0, prefabs.Length);
+                GameObject new_car = Instantiate(prefabs[random_car], new Vector3(5 * a.x, 5 * a.y, 5 * a.z), Quaternion.identity);
                 cars.Add(new_car.GetComponent<Move>());
             }
         }
