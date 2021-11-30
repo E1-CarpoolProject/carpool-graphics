@@ -30,7 +30,7 @@ public class TrafficLightController : MonoBehaviour
         }
         else
         {
-            Debug.Log(www.downloadHandler.text);    // Answer from Python
+            //Debug.Log(www.downloadHandler.text);    // Answer from Python
             List<Vector3> newPositions = new List<Vector3>();
             string txt = www.downloadHandler.text.Replace('\'', '\"');
             txt = txt.TrimStart('[');

@@ -8,13 +8,9 @@ public class Passenger : MonoBehaviour
     public Material waiting_material;
     private MeshRenderer passenger_mesh;
 
-    void Awake()
-    {
-        passenger_mesh = this.gameObject.GetComponent<MeshRenderer>();
-    }
-
     public void changeState(bool n)
     {
+        passenger_mesh = this.gameObject.GetComponent<MeshRenderer>();
         if (n)
         {
             passenger_mesh.material = arrived_material;
