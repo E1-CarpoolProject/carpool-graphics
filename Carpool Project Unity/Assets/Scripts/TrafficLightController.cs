@@ -1,13 +1,15 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.Networking;
+using Newtonsoft.Json;
 
 [Serializable]
 public class StopLight{
     public int state;
+    public string id;
 }
 
 public class TrafficLightController : MonoBehaviour
@@ -21,7 +23,7 @@ public class TrafficLightController : MonoBehaviour
         //[{"state": 1}, {"state": 2}, {"state": 1}, {"state": 2}]
         WWWForm form = new WWWForm();
         form.AddField("bundle", "the data");
-        string url = "http://localhost:8585/traffic_lights";
+        string url = "https://smaa01653126.us-south.cf.appdomain.cloud/traffic_lights";
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();          // Talk to Python
         if (www.error != null)
@@ -31,25 +33,20 @@ public class TrafficLightController : MonoBehaviour
         else
         {
             //Debug.Log(www.downloadHandler.text);    // Answer from Python
-            List<Vector3> newPositions = new List<Vector3>();
-            string txt = www.downloadHandler.text.Replace('\'', '\"');
-            txt = txt.TrimStart('[');
-            txt = txt.TrimEnd(']');
-            string[] strs = txt.Split(new string[] { "}, {" }, StringSplitOptions.None);
-            //Debug.Log("strs.Length:" + strs.Length);
-            for (int i = 0; i < strs.Length; i++)
+            List <StopLight> semaforos = JsonConvert.DeserializeObject<List<StopLight>>(www.downloadHandler.text);
+            for (int i = 0; i < semaforos.Count; i++)
             {
-                strs[i] = strs[i].Trim();
-                if (i == 0) strs[i] = strs[i] + '}';
-                else if (i == strs.Length - 1) strs[i] = '{' + strs[i];
-                else strs[i] = '{' + strs[i] + '}';
-                //Debug.Log(strs[i]);
-                StopLight a = JsonUtility.FromJson<StopLight>(strs[i]);
-                stop_lights.Add(a);
-            }
-            for (int i = 0; i < traffic_lights.Length; i++)
-            {
-                traffic_lights[i].state = stop_lights[i].state;
+                //Debug.Log(semaforos[i].state);
+                string s = semaforos[i].id;
+                for (int j = 0; j < traffic_lights.Length; j++)
+                {
+                    //Debug.Log("ID JSON: " + semaforos[i].id + " ID LOCAL: " + traffic_lights[i].id);
+                    if (traffic_lights[j].id == s)
+                    {
+                        traffic_lights[j].changeState(semaforos[i].state);
+                        break;
+                    }
+                }
             }
         }
     }

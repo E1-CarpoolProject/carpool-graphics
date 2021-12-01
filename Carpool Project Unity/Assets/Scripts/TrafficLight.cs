@@ -15,18 +15,19 @@ public class TrafficLight : MonoBehaviour
     private MeshRenderer yellowLight;
     private MeshRenderer greenLight;
 
-    public int state;
     public string id;
-    void Start()
+    void Awake()
     {
         redLight = transform.GetChild(1).gameObject.GetComponent<MeshRenderer>();
         yellowLight = transform.GetChild(2).gameObject.GetComponent<MeshRenderer>();
         greenLight = transform.GetChild(0).gameObject.GetComponent<MeshRenderer>();
-        state = 2;
     }
 
-    void Update()
+    public void changeState(int state)
     {
+        redLight = transform.GetChild(1).gameObject.GetComponent<MeshRenderer>();
+        yellowLight = transform.GetChild(2).gameObject.GetComponent<MeshRenderer>();
+        greenLight = transform.GetChild(0).gameObject.GetComponent<MeshRenderer>();
         switch (state)
         {
             case 0:

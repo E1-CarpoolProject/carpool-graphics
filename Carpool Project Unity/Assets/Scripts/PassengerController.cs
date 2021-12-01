@@ -24,7 +24,7 @@ public class PassengerController : MonoBehaviour
         //[{"new_direction": 1}, {"new_direction": 2}, {"new_direction": 1}, {"new_direction": 2}]
         WWWForm form = new WWWForm();
         form.AddField("bundle", "the data");
-        string url = "http://localhost:8585/passengers";
+        string url = "https://smaa01653126.us-south.cf.appdomain.cloud/passengers";
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();          // Talk to Python
         if (www.error != null)
@@ -39,7 +39,7 @@ public class PassengerController : MonoBehaviour
                 List<NewPassenger> new_passengers = JsonConvert.DeserializeObject<List<NewPassenger>>(www.downloadHandler.text);
                 for (int i = 0; i < new_passengers.Count; i++)
                 {
-                    Debug.Log(new_passengers[i].arrived);
+                    //Debug.Log(new_passengers[i].arrived);
                     GameObject new_passenger = Instantiate(prefab, new Vector3(5 * new_passengers[i].x, 5 * new_passengers[i].y, 5 * new_passengers[i].z), Quaternion.identity);
                     new_passenger.GetComponent<Passenger>().changeState(new_passengers[i].arrived);
                     passengers.Add(new_passenger);

@@ -52,6 +52,7 @@ public class Move : MonoBehaviour
 
     public void resetMove(Vector3 newTarget)
     {
+        mesh.RecalculateBounds();
         source = target;
         target = newTarget + source;
         timer = totalTime;

@@ -23,7 +23,7 @@ public class MoveController : MonoBehaviour
         //[{"new_direction": 1}, {"new_direction": 2}, {"new_direction": 1}, {"new_direction": 2}]
         WWWForm form = new WWWForm();
         form.AddField("bundle", "the data");
-        string url = "http://localhost:8585/new_cars";
+        string url = "https://smaa01653126.us-south.cf.appdomain.cloud/new_cars";
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();          // Talk to Python
         if (www.error != null)
@@ -41,7 +41,7 @@ public class MoveController : MonoBehaviour
                     System.Random rd = new System.Random();
                     int random_car = rd.Next(0, prefabs.Length);
                     GameObject new_car = Instantiate(prefabs[random_car], new Vector3(5 * new_cars[i].x, 5 * new_cars[i].y, 5 * new_cars[i].z), Quaternion.identity);
-                    Debug.LogWarning(new_car.transform.position);
+                    //Debug.LogWarning(new_car.transform.position);
                     cars.Add(new_car.GetComponent<Move>());
                 }
             }
@@ -53,7 +53,7 @@ public class MoveController : MonoBehaviour
         //[{"new_direction": 1}, {"new_direction": 2}, {"new_direction": 1}, {"new_direction": 2}]
         WWWForm form = new WWWForm();
         form.AddField("bundle", "the data");
-        string url = "http://localhost:8585/directions";
+        string url = "https://smaa01653126.us-south.cf.appdomain.cloud/directions";
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();          // Talk to Python
         if (www.error != null)
@@ -68,6 +68,10 @@ public class MoveController : MonoBehaviour
                 List <NewDirection> new_directions = JsonConvert.DeserializeObject<List<NewDirection>>(www.downloadHandler.text);
                 for (int i = 0; i < new_directions.Count; i++)
                 {
+                    if (new_directions[i].next_direction == "PA")
+                    {
+                        cars[i].gameObject.SetActive(false);
+                    }
                     //Debug.Log(new_directions[i].next_direction);
                     Vector3 new_target = fromStringToVector(new_directions[i].next_direction);
                     next_Target.Add(new_target);
