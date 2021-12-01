@@ -23,7 +23,7 @@ public class TrafficLightController : MonoBehaviour
         //[{"state": 1}, {"state": 2}, {"state": 1}, {"state": 2}]
         WWWForm form = new WWWForm();
         form.AddField("bundle", "the data");
-        string url = "https://smaa01653126.us-south.cf.appdomain.cloud/traffic_lights";
+        string url = "http://localhost:8585/traffic_lights";
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();          // Talk to Python
         if (www.error != null)

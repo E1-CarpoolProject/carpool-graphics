@@ -24,7 +24,7 @@ public class PassengerController : MonoBehaviour
         //[{"new_direction": 1}, {"new_direction": 2}, {"new_direction": 1}, {"new_direction": 2}]
         WWWForm form = new WWWForm();
         form.AddField("bundle", "the data");
-        string url = "https://smaa01653126.us-south.cf.appdomain.cloud/passengers";
+        string url = "http://localhost:8585/passengers";
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();          // Talk to Python
         if (www.error != null)
